@@ -5,7 +5,9 @@ import gym
 import numpy as np
 
 # load the winner
-with open('./results/winner_feedforward', 'rb') as f:
+local_dir = os.path.dirname(__file__)
+results_dir = os.path.join(local_dir, 'results')
+with open(os.path.join(local_dir, results_dir, 'winner_feedforward'), 'rb') as f:
     c = pickle.load(f)
 
 print('Loaded genome:')

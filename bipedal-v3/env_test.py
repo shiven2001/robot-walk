@@ -1,8 +1,10 @@
 import gymnasium as gym
 
-env = gym.make("BipedalWalker-v1", render_mode="human")
+env = gym.make("BipedalWalker-v3", render_mode="human")
 observation, info = env.reset()
 print(observation)
+print(env.observation_space)
+print(env.action_space)
 
 episode_over = False
 while not episode_over:

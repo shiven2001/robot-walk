@@ -5,7 +5,9 @@ import gym
 import numpy as np
 
 # load the winner
-with open('./results/winner_feedforward', 'rb') as f:
+local_dir = os.path.dirname(__file__)
+results_dir = os.path.join(local_dir, 'results')
+with open(os.path.join(local_dir, results_dir, 'winner_feedforward'), 'rb') as f:
     c = pickle.load(f)
 
 print('Loaded genome:')
@@ -20,12 +22,12 @@ config = neat.Config(neat.DefaultGenome, neat.DefaultReproduction,
                      config_path)
 
 net = neat.nn.FeedForwardNetwork.create(c, config)
-env = gym.make("CartPole-v1", render_mode="human")
+env = gym.make("BipedalWalker-v3", render_mode="human")
 observation, info = env.reset()
 
 episode_over = False
 while not episode_over:
-    action = np.argmax(net.activate(observation))
+    action = net.activate(observation)
     observation, reward, terminated, truncated, info = env.step(action)
     env.render()
     episode_over = terminated or truncated

@@ -14,14 +14,13 @@ def eval_genome(genome, config):
     fitnesses = []
 
     for runs in range(runs_per_net):
-        env = gym.make("CartPole-v1")
+        env = gym.make("BipedalWalker-v3")
         observation, info = env.reset()
         # Run the given simulation for up to num_steps time steps.
         fitness = 0.0
         episode_over = False
         while not episode_over:
-            #action = net.activate(observation)
-            action = np.argmax(net.activate(observation))
+            action = net.activate(observation)
             observation, reward, terminated, truncated, info = env.step(action)
 
             fitness += reward
